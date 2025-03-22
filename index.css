@@ -17,7 +17,7 @@
 
 body {
     margin: 0;
-    font-family: 'Inter', 'Roboto', 'Segoe UI', sans-serif;
+    font-family: 'Nunito', 'Segoe UI', sans-serif;
     background-color: var(--bg-color);
     color: var(--text-primary);
     line-height: 1.6;
@@ -53,7 +53,8 @@ header > img {
 }
 
 header > h1 {
-    font-weight: 500;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600;
     color: var(--primary-color);
     letter-spacing: 0.5px;
 }
@@ -130,6 +131,8 @@ main {
 .ingredients-header h2 {
     margin: 0;
     color: var(--primary-dark);
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600;
 }
 
 .ingredients-count {
@@ -138,7 +141,7 @@ main {
     font-size: 0.9rem;
     padding: 4px 10px;
     border-radius: 15px;
-    font-weight: 500;
+    font-weight: 600;
 }
 
 ul.ingredients-list {
@@ -205,6 +208,7 @@ ul.ingredients-list {
 }
 
 .get-recipe-container h3 {
+    font-family: 'Outfit', sans-serif;
     font-size: 1.25rem;
     font-weight: 600;
     line-height: 1.4;
@@ -256,14 +260,16 @@ ul.ingredients-list {
 .suggested-recipe-container h1,
 .suggested-recipe-container h2,
 .suggested-recipe-container h3 {
+    font-family: 'Outfit', sans-serif;
     color: var(--primary-color);
     margin-top: 30px;
     margin-bottom: 15px;
+    font-weight: 600;
 }
 
 .suggested-recipe-container h2 {
     font-size: 1.6rem;
-    border-bottom: 2px solid var(--primary-liht);
+    border-bottom: 2px solid var(--primary-light);
     padding-bottom: 8px;
 }
 
@@ -331,8 +337,10 @@ ul.ingredients-list {
 }
 
 .empty-state h2 {
+    font-family: 'Outfit', sans-serif;
     color: var(--primary-color);
     font-size: 1.8rem;
+    font-weight: 600;
     margin-bottom: 15px;
 }
 
@@ -352,10 +360,12 @@ ul.ingredients-list {
 }
 
 .empty-state-tips h3 {
+    font-family: 'Outfit', sans-serif;
     color: var(--primary-dark);
     margin-top: 0;
     margin-bottom: 15px;
     font-size: 1.2rem;
+    font-weight: 600;
 }
 
 .empty-state-tips ul {
