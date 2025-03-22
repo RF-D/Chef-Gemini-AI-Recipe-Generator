@@ -10,9 +10,10 @@ export default defineConfig(({ mode }) => {
     plugins: [
       react()
     ],
-    // Expose environment variables to your client code
+    // By default, Vite exposes variables prefixed with VITE_
+    // But for extra safety, we'll explicitly define it as well
     define: {
-      'import.meta.env.VITE_WORKER_URL': JSON.stringify(env.WORKER_URL || env.VITE_WORKER_URL)
+      'import.meta.env.VITE_WORKER_URL': JSON.stringify(env.VITE_WORKER_URL)
     }
   }
 })

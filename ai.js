@@ -1,8 +1,7 @@
 // Using Cloudflare Worker instead of direct Gemini API calls
 // This removes the need for API keys on the client side
 
-const WORKER_URL = import.meta.env.VITE_WORKER_URL || 'http://localhost:8787';
-
+const WORKER_URL = import.meta.env.VITE_WORKER_URL;
 export async function getRecipeFromChefGemini(ingredientsArr) {
     const ingredientsString = ingredientsArr.join(", ")
     
