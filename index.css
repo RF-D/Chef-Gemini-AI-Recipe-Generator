@@ -31,7 +31,6 @@ header {
     height: 80px;
     background-color: var(--container-bg);
     box-shadow: var(--shadow);
-    border-bottom: 3px solid var(--primary-color);
 }
 
 header > img {
@@ -249,6 +248,54 @@ ul.ingredients-list > li:last-child {
     100% { transform: rotate(360deg); }
 }
 
+.empty-state {
+    text-align: center;
+    background-color: var(--container-bg);
+    border-radius: 12px;
+    padding: 30px;
+    margin: 40px auto;
+    max-width: 700px;
+    box-shadow: var(--shadow);
+}
+
+.empty-state h2 {
+    color: var(--primary-color);
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+}
+
+.empty-state p {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    margin-bottom: 25px;
+}
+
+.empty-state-tips {
+    background-color: var(--primary-light);
+    border-radius: 8px;
+    padding: 20px;
+    text-align: left;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.empty-state-tips h3 {
+    color: var(--primary-dark);
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+}
+
+.empty-state-tips ul {
+    padding-left: 25px;
+    margin: 0;
+}
+
+.empty-state-tips li {
+    margin-bottom: 8px;
+    color: var(--text-secondary);
+}
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
     main {
@@ -275,5 +322,9 @@ ul.ingredients-list > li:last-child {
     
     ul.ingredients-list {
         padding: 15px 30px;
+    }
+    
+    .empty-state {
+        padding: 20px 15px;
     }
 }
