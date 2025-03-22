@@ -4,9 +4,7 @@ import GeminiRecipe from "./components/GeminiRecipe"
 import { getRecipeFromChefGemini } from "./ai"
 
 export default function Main() {
-    const [ingredients, setIngredients] = React.useState(
-        ["chicken", "all the main spices", "corn", "heavy cream", "pasta"]
-    )
+    const [ingredients, setIngredients] = React.useState([])
     const [recipe, setRecipe] = React.useState("")
     const [isLoading, setIsLoading] = React.useState(false)
 
@@ -23,37 +21,86 @@ export default function Main() {
     }
 
     function addIngredient(formData) {
-        const newIngredient = formData.get("ingredient")
-        setIngredients(prevIngredients => [...prevIngredients, newIngredient])
+        const ingredientInput = formData.get("ingredient").trim()
+        
+        if (!ingredientInput) return
+        
+        // Split by commas and filter out empty strings
+        const newIngredients = ingredientInput
+            .split(',')
+            .map(item => item.trim())
+            .filter(item => item.length > 0)
+        
+        // Add all new ingredients to the state
+        setIngredients(prevIngredients => [...prevIngredients, ...newIngredients])
+        
+        // Reset the form
+        document.querySelector('.add-ingredient-form').reset()
     }
 
     return (
         <main>
-            <form action={addIngredient} className="add-ingredient-form">
-                <input
-                    type="text"
-                    placeholder="e.g. oregano"
-                    aria-label="Add ingredient"
-                    name="ingredient"
-                />
-                <button>Add ingredient</button>
-            </form>
-
-            {ingredients.length > 0 &&
-                <IngredientsList
-                    ingredients={ingredients}
-                    getRecipe={getRecipe}
-                />
-            }
-
-            {isLoading && 
-                <div className="loading-container">
-                    <div className="loading-spinner"></div>
-                    <p>Chef Gemini is cooking up a recipe...</p>
-                </div>
-            }
+            <div className="app-top-section">
+                <form action={addIngredient} className="add-ingredient-form">
+                    <input
+                        type="text"
+                        placeholder="e.g. chicken, rice, tomatoes"
+                        aria-label="Add ingredient"
+                        name="ingredient"
+                        required
+                    />
+                    <button>Add ingredient</button>
+                </form>
+            </div>
             
-            {!isLoading && recipe && <GeminiRecipe recipe={recipe} />}
+            {ingredients.length === 0 ? (
+                <div className="empty-state">
+                    <h2>Let's create a recipe!</h2>
+                    <p>Add at least 4 ingredients you have available to generate a personalized recipe.</p>
+                    <div className="empty-state-tips">
+                        <h3>Tips:</h3>
+                        <ul>
+                            <li>Include proteins (chicken, beef, tofu)</li>
+                            <li>Add some vegetables or fruits</li>
+                            <li>Include starches (pasta, rice, potatoes)</li>
+                            <li>Mention spices or herbs you have</li>
+                        </ul>
+                    </div>
+                </div>
+            ) : (
+                <div className="app-content">
+                    <div className="ingredients-panel">
+                        <IngredientsList
+                            ingredients={ingredients}
+                            getRecipe={getRecipe}
+                            hasRecipe={!!recipe}
+                            removeIngredient={(index) => {
+                                setIngredients(prevIngredients => 
+                                    prevIngredients.filter((_, i) => i !== index)
+                                )
+                            }}
+                        />
+                    </div>
+                    
+                    <div className="recipe-panel">
+                        {isLoading && 
+                            <div className="loading-container">
+                                <div className="loading-spinner"></div>
+                                <p>Chef Gemini is cooking up a recipe...</p>
+                            </div>
+                        }
+                        
+                        {!isLoading && recipe && <GeminiRecipe recipe={recipe} />}
+                        
+                        {!isLoading && !recipe && (
+                            <div className="recipe-placeholder">
+                                <h2>Your recipe will appear here</h2>
+                                <p>Use the "Get a recipe" button when you've added at least 4 ingredients.</p>
+                            </div>
+                        )}
+                    </div>
+                </div>
+            )}
         </main>
     )
 }
