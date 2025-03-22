@@ -3,7 +3,7 @@
     --primary-light: #E3F2FD;
     --primary-dark: #0D47A1;
     --accent-color: #FF8F00;
-    --bg-color: #9FB4C7;
+    --bg-color: #1c4467;
     --text-primary: #212121;
     --text-secondary: #616161;
     --container-bg: #fefdf5;
@@ -255,7 +255,7 @@ ul.ingredients-list {
     font-size: 1.1rem;
     font-weight: 400;
     background-color: var(--container-bg);
-    padding: 40px;
+    padding: 15px 30px 15px 30px;
     border-radius: 12px;
     box-shadow: var(--shadow);
     margin-bottom: 40px;
@@ -340,10 +340,11 @@ ul.ingredients-list {
     text-align: center;
     background-color: var(--container-bg);
     border-radius: 12px;
-    padding: 30px;
+    padding: 30px 30px 60px 30px;
     margin: 40px auto;
     max-width: 700px;
     box-shadow: var(--shadow);
+    
 }
 
 .empty-state h2 {
