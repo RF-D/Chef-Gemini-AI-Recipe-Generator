@@ -12,7 +12,7 @@ export default defineConfig(({ mode }) => {
     ],
     // Expose environment variables to your client code
     define: {
-      'import.meta.env.VITE_GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY || env.VITE_GEMINI_API_KEY)
+      'import.meta.env.VITE_WORKER_URL': JSON.stringify(env.WORKER_URL || env.VITE_WORKER_URL)
     }
   }
 })
