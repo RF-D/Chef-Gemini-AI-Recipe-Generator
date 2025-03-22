@@ -71,6 +71,11 @@ export default function Main() {
                 <IngredientsList
                     ingredients={ingredients}
                     getRecipe={getRecipe}
+                    removeIngredient={(index) => {
+                        setIngredients(prevIngredients => 
+                            prevIngredients.filter((_, i) => i !== index)
+                        )
+                    }}
                 />
             }
 
