@@ -1,12 +1,12 @@
 :root {
-    --primary-color: #1565C0;
+    --primary-color: #125caf;
     --primary-light: #E3F2FD;
     --primary-dark: #0D47A1;
     --accent-color: #FF8F00;
-    --bg-color: #d1d7f6;
+    --bg-color: #9FB4C7;
     --text-primary: #212121;
     --text-secondary: #616161;
-    --container-bg: E3F2FD;
+    --container-bg: #fefdf5;
     --border-color: #E0E0E0;
     --shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
@@ -48,6 +48,7 @@ main {
     padding: 40px 30px 20px;
     max-width: 900px;
     margin: 0 auto;
+    
 }
 
 .add-ingredient-form {
@@ -106,11 +107,15 @@ main {
     max-width: 600px;
     margin-left: auto;
     margin-right: auto;
+    background-color: var(--container-bg);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    padding: 15px 20px;
 }
 
 .ingredients-header h2 {
     margin: 0;
-    color: var(--primary-color);
+    color: var(--primary-dark);
 }
 
 .ingredients-count {
@@ -179,7 +184,7 @@ ul.ingredients-list {
     justify-content: space-between;
     align-items: center;
     border-radius: 12px;
-    background: var(--primary-light);
+    background: var(--container-bg);
     padding: 20px 30px;
     margin-bottom: 40px;
     box-shadow: var(--shadow);
