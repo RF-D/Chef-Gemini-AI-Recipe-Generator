@@ -37,7 +37,7 @@ export default function IngredientsList(props) {
                             : 'Generate a recipe from your list of ingredients.'}</p>
                     </div>
                     <button onClick={props.getRecipe}>
-                        {props.hasRecipe ? 'Get a new recipe' : 'Get a recipe'}
+                        {props.hasRecipe ? 'New Recipe' : 'Get a recipe'}
                     </button>
                 </div>
             )}
