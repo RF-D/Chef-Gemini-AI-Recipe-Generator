@@ -8,11 +8,7 @@ You are an assistant that receives a list of ingredients that a user has and sug
 // If deploying this project, create a backend service or use 
 // serverless architecture to keep your API keys private
 
-// Try to get API key from various possible environment variables
-const apiKey = import.meta.env.VITE_GEMINI_API_KEY || 
-               import.meta.env.GEMINI_API_KEY || 
-               "__REPLACE_WITH_YOUR_API_KEY__"; // Placeholder that will be replaced during build
-
+const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
 const genAI = new GoogleGenerativeAI(apiKey);
 
 export async function getRecipeFromChefGemini(ingredientsArr) {

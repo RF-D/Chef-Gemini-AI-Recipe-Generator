@@ -11,9 +11,6 @@ RUN npm ci --quiet --legacy-peer-deps
 # Copy the rest of the application
 COPY . .
 
-# Replace API key placeholder in ai.js with actual API key
-RUN sed -i "s/__REPLACE_WITH_YOUR_API_KEY__/${GEMINI_API_KEY}/g" ai.js
-
 # Build the app
 RUN npm run build
 
