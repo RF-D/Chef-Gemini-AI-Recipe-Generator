@@ -5,8 +5,8 @@ WORKDIR /app
 # Copy package files first for better caching
 COPY package.json package-lock.json ./
 
-# Install dependencies with a clean install
-RUN npm ci --quiet
+# Install dependencies with legacy peer deps to handle React version conflicts
+RUN npm ci --quiet --legacy-peer-deps
 
 # Copy the rest of the application
 COPY . .
