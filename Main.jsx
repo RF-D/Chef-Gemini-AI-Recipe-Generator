@@ -21,8 +21,21 @@ export default function Main() {
     }
 
     function addIngredient(formData) {
-        const newIngredient = formData.get("ingredient")
-        setIngredients(prevIngredients => [...prevIngredients, newIngredient])
+        const ingredientInput = formData.get("ingredient").trim()
+        
+        if (!ingredientInput) return
+        
+        // Split by commas and filter out empty strings
+        const newIngredients = ingredientInput
+            .split(',')
+            .map(item => item.trim())
+            .filter(item => item.length > 0)
+        
+        // Add all new ingredients to the state
+        setIngredients(prevIngredients => [...prevIngredients, ...newIngredients])
+        
+        // Reset the form
+        document.querySelector('.add-ingredient-form').reset()
     }
 
     return (
