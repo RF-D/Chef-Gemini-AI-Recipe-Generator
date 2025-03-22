@@ -1,6 +1,6 @@
 {
-  "name": "Scrim-s06ivf6",
-  "description": "https://scrimba.com/learn-react-c0e/~0vs/s0skrvoss9/head",
+  "name": "chef-gemini",
+  "description": "Chef Gemini AI Recipe Generator",
   "scripts": {
     "start": "vite",
     "dev": "vite",
@@ -8,10 +8,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@google/generative-ai": "^0.2.1",
+    "dotenv": "^16.4.7",
     "react": "19.0.0-rc-8b08e99e-20240713",
     "react-dom": "19.0.0-rc-8b08e99e-20240713",
-    "@anthropic-ai/sdk": "0.27.3",
-    "@huggingface/inference": "2.8.1",
     "react-markdown": "9.0.1",
     "vite": "latest"
   },

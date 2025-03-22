@@ -1,19 +1,35 @@
-# Getting Started
-Install the dependencies and run the project
+# Chef Gemini AI Recipe Generator
+
+An AI-powered recipe generator that creates recipes based on the ingredients you have available.
+
+## Getting Started
+
+### API Key Setup
+1. Rename `.env.example` to `.env`
+2. Get your Gemini API key from [Google AI Studio](https://aistudio.google.com/)
+3. Add your API key to the `.env` file: `VITE_GEMINI_API_KEY=your_key_here`
+
+### Installation and Running
 ```
 npm install
-npm start
+npm run dev
 ```
 
-Head over to https://vitejs.dev/ to learn more about configuring vite
-## About Scrimba
+The app will be available at http://localhost:5173 (or the port shown in your terminal)
 
-At Scrimba our goal is to create the best possible coding school at the cost of a gym membership! 💜
-If we succeed with this, it will give anyone who wants to become a software developer a realistic shot at succeeding, regardless of where they live and the size of their wallets 🎉
-The Frontend Developer Career Path aims to teach you everything you need to become a Junior Developer, or you could take a deep-dive with one of our advanced courses 🚀
+### Production Build
+```
+npm run build
+npm run preview
+```
 
-- [Our courses](https://scrimba.com/allcourses)
-- [The Frontend Career Path](https://scrimba.com/learn/frontend)
-- [Become a Scrimba Pro member](https://scrimba.com/pricing)
+## Features
+- Enter ingredients you have on hand
+- Get AI-generated recipes using Google's Gemini 2.0 Flash model
+- Beautifully formatted recipe display with Markdown support
 
-Happy Coding!
+## Technologies
+- React
+- Vite
+- Google Generative AI (Gemini 2.0 Flash model)
+- React Markdown

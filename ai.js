@@ -1,59 +1,53 @@
-import Anthropic from "@anthropic-ai/sdk"
-import { HfInference } from '@huggingface/inference'
+import { GoogleGenerativeAI } from '@google/generative-ai';
 
 const SYSTEM_PROMPT = `
 You are an assistant that receives a list of ingredients that a user has and suggests a recipe they could make with some or all of those ingredients. You don't need to use every ingredient they mention in your recipe. The recipe can include additional ingredients they didn't mention, but try not to include too many extra ingredients. Format your response in markdown to make it easier to render to a web page
 `
 
-// 🚨👉 ALERT: Read message below! You've been warned! 👈🚨
-// If you're following along on your local machine instead of
-// here on Scrimba, make sure you don't commit your API keys
-// to any repositories and don't deploy your project anywhere
-// live online. Otherwise, anyone could inspect your source
-// and find your API keys/tokens. If you want to deploy
-// this project, you'll need to create a backend of some kind,
-// either your own or using some serverless architecture where
-// your API calls can be made. Doing so will keep your
-// API keys private.
+// SECURITY WARNING: Never commit API keys to repositories
+// If deploying this project, create a backend service or use 
+// serverless architecture to keep your API keys private
 
-const anthropic = new Anthropic({
-    // Make sure you set an environment variable in Scrimba 
-    // for ANTHROPIC_API_KEY
-    apiKey: process.env.ANTHROPIC_API_KEY,
-    dangerouslyAllowBrowser: true,
-})
+const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+const genAI = new GoogleGenerativeAI(apiKey);
 
-export async function getRecipeFromChefClaude(ingredientsArr) {
+export async function getRecipeFromChefGemini(ingredientsArr) {
     const ingredientsString = ingredientsArr.join(", ")
-
-    const msg = await anthropic.messages.create({
-        model: "claude-3-haiku-20240307",
-        max_tokens: 1024,
-        system: SYSTEM_PROMPT,
-        messages: [
-            { role: "user", content: `I have ${ingredientsString}. Please give me a recipe you'd recommend I make!` },
-        ],
-    });
-    return msg.content[0].text
-}
-
-// Make sure you set an environment variable in Scrimba 
-// for HF_ACCESS_TOKEN
-const hf = new HfInference(process.env.HF_ACCESS_TOKEN)
-
-export async function getRecipeFromMistral(ingredientsArr) {
-    const ingredientsString = ingredientsArr.join(", ")
+    
     try {
-        const response = await hf.chatCompletion({
-            model: "mistralai/Mixtral-8x7B-Instruct-v0.1",
-            messages: [
-                { role: "system", content: SYSTEM_PROMPT },
-                { role: "user", content: `I have ${ingredientsString}. Please give me a recipe you'd recommend I make!` },
+        const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+        
+        const generationConfig = {
+            maxOutputTokens: 1024,
+        };
+        
+        const chat = model.startChat({
+            generationConfig,
+            safetySettings: [
+                {
+                    category: "HARM_CATEGORY_HARASSMENT",
+                    threshold: "BLOCK_MEDIUM_AND_ABOVE",
+                },
+                {
+                    category: "HARM_CATEGORY_HATE_SPEECH",
+                    threshold: "BLOCK_MEDIUM_AND_ABOVE",
+                },
+                {
+                    category: "HARM_CATEGORY_SEXUALLY_EXPLICIT",
+                    threshold: "BLOCK_MEDIUM_AND_ABOVE",
+                },
+                {
+                    category: "HARM_CATEGORY_DANGEROUS_CONTENT",
+                    threshold: "BLOCK_MEDIUM_AND_ABOVE",
+                },
             ],
-            max_tokens: 1024,
-        })
-        return response.choices[0].message.content
+            systemInstruction: SYSTEM_PROMPT,
+        });
+        
+        const result = await chat.sendMessage(`I have ${ingredientsString}. Please give me a recipe you'd recommend I make!`);
+        return result.response.text();
     } catch (err) {
-        console.error(err.message)
+        console.error("Error generating recipe:", err.message);
+        return "I'm sorry, there was an error generating your recipe. Please try again later.";
     }
 }

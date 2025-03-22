@@ -34,4 +34,4 @@ Thumbs.db
 *.sln
 
 # Claude configuration
-CLAUDE.md
+CLAUDE.md.env
