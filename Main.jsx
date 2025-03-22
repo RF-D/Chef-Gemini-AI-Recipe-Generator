@@ -40,18 +40,20 @@ export default function Main() {
 
     return (
         <main>
-            <form action={addIngredient} className="add-ingredient-form">
-                <input
-                    type="text"
-                    placeholder="e.g. chicken, rice, tomatoes"
-                    aria-label="Add ingredient"
-                    name="ingredient"
-                    required
-                />
-                <button>Add ingredient</button>
-            </form>
+            <div className="app-top-section">
+                <form action={addIngredient} className="add-ingredient-form">
+                    <input
+                        type="text"
+                        placeholder="e.g. chicken, rice, tomatoes"
+                        aria-label="Add ingredient"
+                        name="ingredient"
+                        required
+                    />
+                    <button>Add ingredient</button>
+                </form>
+            </div>
             
-            {ingredients.length === 0 && (
+            {ingredients.length === 0 ? (
                 <div className="empty-state">
                     <h2>Let's create a recipe!</h2>
                     <p>Add at least 4 ingredients you have available to generate a personalized recipe.</p>
@@ -65,28 +67,39 @@ export default function Main() {
                         </ul>
                     </div>
                 </div>
-            )}
-
-            {ingredients.length > 0 &&
-                <IngredientsList
-                    ingredients={ingredients}
-                    getRecipe={getRecipe}
-                    removeIngredient={(index) => {
-                        setIngredients(prevIngredients => 
-                            prevIngredients.filter((_, i) => i !== index)
-                        )
-                    }}
-                />
-            }
-
-            {isLoading && 
-                <div className="loading-container">
-                    <div className="loading-spinner"></div>
-                    <p>Chef Gemini is cooking up a recipe...</p>
+            ) : (
+                <div className="app-content">
+                    <div className="ingredients-panel">
+                        <IngredientsList
+                            ingredients={ingredients}
+                            getRecipe={getRecipe}
+                            removeIngredient={(index) => {
+                                setIngredients(prevIngredients => 
+                                    prevIngredients.filter((_, i) => i !== index)
+                                )
+                            }}
+                        />
+                    </div>
+                    
+                    <div className="recipe-panel">
+                        {isLoading && 
+                            <div className="loading-container">
+                                <div className="loading-spinner"></div>
+                                <p>Chef Gemini is cooking up a recipe...</p>
+                            </div>
+                        }
+                        
+                        {!isLoading && recipe && <GeminiRecipe recipe={recipe} />}
+                        
+                        {!isLoading && !recipe && (
+                            <div className="recipe-placeholder">
+                                <h2>Your recipe will appear here</h2>
+                                <p>Use the "Get a recipe" button when you've added at least 4 ingredients.</p>
+                            </div>
+                        )}
+                    </div>
                 </div>
-            }
-            
-            {!isLoading && recipe && <GeminiRecipe recipe={recipe} />}
+            )}
         </main>
     )
 }
