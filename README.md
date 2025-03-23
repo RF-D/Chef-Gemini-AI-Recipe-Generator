@@ -2,6 +2,10 @@
 
 An AI-powered recipe generator that creates recipes based on the ingredients you have available.
 
+## Live Demo
+
+Try it here [Chef Gemini AI Recipe Generator](https://chef-gemini-ai-recipe-generator.up.railway.app/)
+
 ## Getting Started
 
 ### Setup
